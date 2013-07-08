@@ -917,8 +917,6 @@ class libeyelink_dummy:
 
 		self.blinking = False # current 'blinking' condition (MOUSEBUTTONDOWN = eyes closed; MOUSEBUTTONUP = eyes open)
 		self.bbpos = (resolution[0]/2,resolution[1]/2) # before 'blink' position
-<<<<<<< HEAD
-=======
 
 		# check if blinking functionality is possible
 		if not hasattr(self.simulator, 'get_pressed') or not hasattr(self.simulator, 'set_poesje'):
@@ -926,7 +924,6 @@ class libeyelink_dummy:
 			self.blinkfun = False
 		else:
 			self.blinkfun = True
->>>>>>> upstream/master
 
 	def send_command(self, cmd):
 
@@ -963,15 +960,12 @@ class libeyelink_dummy:
 		"""Dummy calibration"""
 
 		print 'libeyelink.calibrate(): calibration would now take place'
-<<<<<<< HEAD
-=======
 
 	def get_eyelink_clock_async(self):
 
 		"""Asynchronity between libeyelink_dummy object and OpenSesame"""
 
 		return 0
->>>>>>> upstream/master
 
 	def drift_correction(self, pos = None, fix_triggered = False):
 
@@ -1092,22 +1086,6 @@ class libeyelink_dummy:
 
 		"""Returns simulated gaze position (=mouse position)"""
 
-<<<<<<< HEAD
-		pygame.event.get()
-
-		if self.blinking:
-			if self.simulator.get_pressed()[2]: # buttondown
-				self.simulator.set_pos(pos=(self.bbpos[0],self.resolution[1])) # set position to blinking position
-			elif not self.simulator.get_pressed()[2]: # buttonup
-				self.simulator.set_pos(pos=self.bbpos) # set position to position before blinking
-				self.blinking = False # 'blink' stopped
-
-		elif not self.blinking:
-			if pygame.mouse.get_pressed()[2]: # buttondown
-				self.blinking = True # 'blink' started
-				self.bbpos =  self.simulator.get_pos()[0] # position before blinking
-				self.simulator.set_pos(pos=(self.bbpos[0],self.resolution[1])) # set position to blinking position
-=======
 		if self.blinkfun:
 			if self.blinking:
 				if self.simulator.get_pressed()[2]: # buttondown
@@ -1121,7 +1099,6 @@ class libeyelink_dummy:
 					self.blinking = True # 'blink' started
 					self.bbpos =  self.simulator.get_pos()[0] # position before blinking
 					self.simulator.set_pos(pos=(self.bbpos[0],self.resolution[1])) # set position to blinking position
->>>>>>> upstream/master
 
 		return self.simulator.get_pos()[0]
 
@@ -1165,8 +1142,6 @@ class libeyelink_dummy:
 				break
 
 		return self.experiment.time(), spos
-<<<<<<< HEAD
-=======
 
 	def __wait_for_saccade_start_pre_10028(self):
 
@@ -1177,7 +1152,6 @@ class libeyelink_dummy:
 
 		return self.wait_for_saccade_start()
 
->>>>>>> upstream/master
 
 	def wait_for_saccade_end(self):
 
@@ -1264,15 +1238,6 @@ class libeyelink_dummy:
 		# blinks are simulated with mouseclicks: a right mouseclick simulates the closing
 		# of the eyes, a mousebuttonup the opening.
 
-<<<<<<< HEAD
-		clicked = False
-		while not clicked:
-			pos = self.sample()
-			if self.simulator.get_pressed()[2]:
-				clicked = True
-
-		return self.experiment.time(), pos
-=======
 		if self.blinkfun:
 			while not self.blinking:
 				pos = self.sample()
@@ -1282,7 +1247,6 @@ class libeyelink_dummy:
 		else:
 			print("libeyelink_dummy: blink functionality not available")
 			return self.experiment.time(), (0,0)
->>>>>>> upstream/master
 
 	def wait_for_blink_end(self):
 
@@ -1291,24 +1255,6 @@ class libeyelink_dummy:
 		# blinks are simulated with mouseclicks: a right mouseclick simulates the closing
 		# of the eyes, a mousebuttonup the opening.
 
-<<<<<<< HEAD
-		blinkstart = False; blinkend = False
-
-		pygame.event.get()
-
-		# wait for 'blink' start
-		while not blinkstart:
-			spos = self.sample()
-			if self.simulator.get_pressed()[2]:
-				blinkstart = True
-		# wait for 'blink' end
-		while not blinkend:
-			epos = self.sample()
-			if not self.simulator.get_pressed()[2]:
-				blinkend = True
-
-		return self.experiment.time(), epos
-=======
 		if self.blinkfun:
 			# wait for blink start
 			while not self.blinking:
@@ -1322,7 +1268,6 @@ class libeyelink_dummy:
 		else:
 			print("libeyelink_dummy: blink functionality not available")
 			return self.experiment.time(), (0,0)
->>>>>>> upstream/master
 
 	def prepare_backdrop(self, canvas):
 		pass

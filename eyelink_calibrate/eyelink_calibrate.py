@@ -95,18 +95,10 @@ class eyelink_calibrate(item.item):
 
 			self.experiment.cleanup_functions.append(self.close)
 		else:
-<<<<<<< HEAD
-			debug.msg("loading libeyelink (dummy mode)")
-			self.experiment.eyelink = libeyelink.libeyelink_dummy(self.experiment, \
-				(self.get("width"), self.get("height")))
-
-		# Report success
-=======
 			debug.msg(u'loading libeyelink (dummy mode)')
 			self.experiment.eyelink = libeyelink.libeyelink_dummy( \
 				self.experiment, (self.get(u'width'), self.get(u'height')))
 		# Report success DEPRECATED IN 0.27.2+
->>>>>>> upstream/master
 		return True
 
 	def close(self):
